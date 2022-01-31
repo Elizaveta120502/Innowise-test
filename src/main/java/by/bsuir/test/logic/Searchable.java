@@ -5,7 +5,8 @@ import by.bsuir.test.entity.User;
 import java.io.IOException;
 import java.util.ArrayList;
 
-public interface Readable {
+public interface Searchable {
 
-    ArrayList<User> read() throws IOException;
+    User toFindUser(String name, String surname) throws IOException;
+
 }

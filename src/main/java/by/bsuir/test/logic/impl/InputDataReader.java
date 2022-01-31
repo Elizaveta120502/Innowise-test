@@ -14,9 +14,25 @@ import java.util.ArrayList;
 public class InputDataReader implements Readable {
 
     private static final String FILE_NAME = "C:/Users/ЛИЗАВЕТА/IdeaProjects/test-innowise/src/main/resources/Users.txt";
+    private static  InputDataReader inputDataReader;
+
+    public InputDataReader(InputDataReader inputDataReader) {
+        this.inputDataReader = inputDataReader;
+    }
+
+    private InputDataReader() {
+    }
+
+    public static InputDataReader getInstance(){
+        if (inputDataReader == null){
+            inputDataReader = new InputDataReader();
+        }
+        return inputDataReader;
+    }
+
 
     @Override
-    public ArrayList<User> read(User user) throws IOException {
+    public ArrayList<User> read() throws IOException {
 
         ArrayList<User> users = new ArrayList<>();
 
@@ -44,6 +60,7 @@ public class InputDataReader implements Readable {
                             telephones.add(splitData[8]);
                         }
 
+                        User user = new User();
                         user.setId(Integer.parseInt(splitData[0]));
                         user.setName(splitData[1]);
                         user.setSurname(splitData[2]);
@@ -51,11 +68,11 @@ public class InputDataReader implements Readable {
                         user.setRole(roles);
                         user.setMobilePhone(telephones);
 
-                        user = new User(user.getId(), user.getName(),
+                        User newUser = new User(user.getId(), user.getName(),
                                 user.getSurname(), user.getEmail(),
                                 user.getRole(), user.getMobilePhone());
 
-                        users.add(user);
+                        users.add(newUser);
                     } else {
                         throw new InvalidDataException("invalid input data");
                     }
