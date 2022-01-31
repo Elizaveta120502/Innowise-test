@@ -1,0 +1,5 @@
+1 Harry Potter harry.p@gmail.com user admin 375001256349 375004563219
+2 Lily Potter lily.p@gmail.com super_admin 375001476349 375007413698 375669231458
+3 Ron Weasley ron.w@gmail.com customer admin 375001256349 375004789023
+4 Ginny Weasley ggg.w@gmail.com user provider 375001256349
+5 Din Thomas ddin@gmail.com user admin 375006799121 375004633219 375447201281
