@@ -1,5 +1,7 @@
 package by.bsuir.test.entity;
 
+import java.util.Optional;
+
 public enum Role {
     USER(1),
     CUSTOMER(1),
@@ -17,12 +19,16 @@ public enum Role {
     Role() {
     }
 
+    public int getLevel() {
+        return level;
+    }
+
     public static Role of(String name) {
         for (Role role : values()) {
             if (role.name().equalsIgnoreCase(name)) {
                 return role;
             }
         }
-        return UNAUTHORIZED_USER;
+        return null;
     }
 }

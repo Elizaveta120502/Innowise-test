@@ -10,6 +10,7 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Optional;
 
 public class InputDataReader implements Readable {
 
@@ -48,8 +49,10 @@ public class InputDataReader implements Readable {
                 try {
                     if (splitData.length >= 7) {
                         ArrayList<Role> roles = new ArrayList<>();
-                        roles.add(Role.of(splitData[4]));
-                        roles.add(Role.of(splitData[5]));
+                        if (Optional.empty().isPresent()) {
+                            roles.add(Role.of(splitData[4]));
+                            roles.add(Role.of(splitData[5]));
+                        }
 
                         ArrayList<String> telephones = new ArrayList<>();
                         telephones.add(splitData[6]);
