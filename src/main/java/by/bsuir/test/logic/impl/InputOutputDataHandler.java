@@ -130,7 +130,7 @@ public class InputOutputDataHandler {
 
     }
 
-    static void cleanFile(User user) throws IOException {
+    static void cleanFile() throws IOException {
 
         BufferedReader reader = new BufferedReader(new FileReader(file));
         BufferedWriter writer = new BufferedWriter(new FileWriter(buferFile));

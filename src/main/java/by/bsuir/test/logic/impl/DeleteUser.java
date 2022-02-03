@@ -7,24 +7,36 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 public class DeleteUser implements Deletable {
+
+    private static DeleteUser deleteUser;
+    private static final int ID_UNIT = 1;
+
+    private DeleteUser() {
+    }
+
+    public static DeleteUser getInstance() {
+        if (deleteUser == null) {
+            deleteUser = new DeleteUser();
+        }
+        return deleteUser;
+    }
+
     @Override
     public void deleteById(int id) throws IOException {
+
         ArrayList<User> users = InputOutputDataHandler.getInstance().read();
-        for (User us: users){
-            if (us.getId() == id){
-                users.remove(us);
-            }
+        int tempId = 0;
+        for (User us : users) {
+             if (us.getId() == id){
+                 tempId = id;
+             }
+        }
+        users.remove(tempId - ID_UNIT);
+
+        InputOutputDataHandler.cleanFile();
+        for (User u : users) {
+            InputOutputDataHandler.getInstance().write(u);
         }
     }
 
-    @Override
-    public void deleteByNameSurname(String name, String surname) throws IOException {
-        ArrayList<User> users = InputOutputDataHandler.getInstance().read();
-        for (User us: users){
-            if (us.getName().equals(name) && us.getSurname().equals(surname)){
-                users.remove(us);
-            }
-        }
-
-    }
 }

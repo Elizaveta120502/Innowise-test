@@ -7,6 +7,7 @@ import by.bsuir.test.validator.Validator;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Random;
 import java.util.Scanner;
 
 public class CreateUser {
@@ -28,8 +29,8 @@ public class CreateUser {
 
     public User createUser() throws IOException, InvalidDataException {
 
-
-        int id = InputOutputDataHandler.read().size() + ID_UNIT;
+        Random rand = new Random();
+        int id = rand.nextInt(1000) + ID_UNIT;
         String name = null;
         String surname = null;
         String email = null;
@@ -51,6 +52,9 @@ public class CreateUser {
 
         }
         User newUser = new User(id, name, surname, email, roles, telephones);
+
+      //  InputOutputDataHandler.getInstance().write(newUser);
+
 
         return newUser;
 

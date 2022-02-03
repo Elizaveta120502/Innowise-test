@@ -69,7 +69,7 @@ public class EditUser implements Editable {
                 us.setMobilePhone(newPhones);
             }
         }
-        InputOutputDataHandler.cleanFile(editableUser);
+        InputOutputDataHandler.cleanFile();
         for (User u: newUsersList) {
             InputOutputDataHandler.getInstance().write(u);
         }
@@ -87,7 +87,7 @@ public class EditUser implements Editable {
 
             }
         }
-        InputOutputDataHandler.cleanFile(new User());
+        InputOutputDataHandler.cleanFile();
         for (User u: changedUserDataList) {
             InputOutputDataHandler.getInstance().write(u);
         }
@@ -110,7 +110,7 @@ public class EditUser implements Editable {
 
             }
         }
-        InputOutputDataHandler.cleanFile(newDataUser);
+        InputOutputDataHandler.cleanFile();
         for (User u: newUsersList) {
             InputOutputDataHandler.getInstance().write(u);
         }
