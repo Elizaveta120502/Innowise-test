@@ -2,24 +2,38 @@ package by.bsuir.test.logic.impl;
 
 import by.bsuir.test.entity.User;
 import by.bsuir.test.logic.Searchable;
-import by.bsuir.test.logic.impl.InputDataReader;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Optional;
 
 
 public class SearchUser implements Searchable {
+    private static SearchUser searchUser;
+
+    private SearchUser() {
+    }
+
+    public static SearchUser getInstance(){
+        if (searchUser == null){
+            searchUser = new SearchUser();
+        }
+        return searchUser;
+    }
 
     @Override
-    public User toFindUser(String name, String surname) throws IOException {
+    public Optional<User> findUserByEmail(String email) throws IOException {
 
-        User user = null;
-        for (User us : InputDataReader.getInstance().read()){
-            if (us.getName().equals(name) && us.getSurname().equals(surname)){
+        User user = new User();
+        ArrayList<User> users = InputOutputDataHandler.getInstance().read();
+        for (User us : users){
+            if (us.getEmail().equals(email)) {
                 user = us;
-            }else{
-                System.out.println("No such employee in a list");
             }
         }
-        return user;
+        return Optional.of(user);
     }
+
+
+
 }

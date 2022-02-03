@@ -12,25 +12,27 @@ import java.util.Scanner;
 public class CreateUser {
 
     private static CreateUser createUser;
-    private static ArrayList<Role> roles = new ArrayList<>();
-    private static ArrayList<String> telephones = new ArrayList<>();
+    private static final int ID_UNIT = 1;
+    static ArrayList<Role> roles = new ArrayList<>();
+    static ArrayList<String> telephones = new ArrayList<>();
 
     private CreateUser() {
     }
 
     public static CreateUser getInstance() {
         if (createUser == null) {
-            return new CreateUser();
+            createUser = new CreateUser();
         }
         return createUser;
     }
 
     public User createUser() throws IOException, InvalidDataException {
 
-        int id = InputDataReader.getInstance().read().size();
-        String name;
-        String surname;
-        String email;
+
+        int id = InputOutputDataHandler.read().size() + ID_UNIT;
+        String name = null;
+        String surname = null;
+        String email = null;
         Scanner sc = new Scanner(System.in);
 
         System.out.println("User creation. Please follow next steps:\n Enter name ");
@@ -47,17 +49,15 @@ public class CreateUser {
             chooseRole();
             enterPhones();
 
-
-            User newUser = new User(id, name, surname, email, roles, telephones);
-
-            return newUser;
         }
+        User newUser = new User(id, name, surname, email, roles, telephones);
 
-        return null;
+        return newUser;
+
     }
 
 
-    private static void chooseRole() {
+    static void chooseRole() {
         String firstRole;
         String secondRole;
         Scanner sc = new Scanner(System.in);
@@ -107,87 +107,87 @@ public class CreateUser {
                 }
 
 
-                    roles.add(Role.of(secondRole));
-
-                }
+                roles.add(Role.of(secondRole));
 
             }
 
         }
-
-        private static void enterPhones () throws InvalidDataException {
-            String firstPhone = null;
-            String secondPhone = null;
-            String theardPhone = null;
-            int amount = 0;
-            Scanner sc = new Scanner(System.in);
-
-            System.out.println("How many phones do you want to enter?");
-
-
-            if (sc.hasNextInt()) {
-                amount = sc.nextInt();
-                while (amount <= 0 || amount > 3) {
-                    amount = sc.nextInt();
-                }
-            }
-            switch (amount) {
-                case 1:
-                    System.out.println("Enter telephone: ");
-                    if (sc.hasNext()) {
-                        firstPhone = sc.next();
-                        while (!Validator.getIntance().telephoneIsValid(firstPhone)) {
-                            firstPhone = sc.next();
-                        }
-                    }
-                    telephones.add(firstPhone);
-                    break;
-
-                case 2:
-                    System.out.println("Enter first telephone: ");
-                    if (sc.hasNext()) {
-                        firstPhone = sc.next();
-                        while (!Validator.getIntance().telephoneIsValid(firstPhone)) {
-                            firstPhone = sc.next();
-                        }
-                        System.out.println("Enter second telephone: ");
-                        secondPhone = sc.next();
-                        while (!Validator.getIntance().telephoneIsValid(secondPhone)) {
-                            secondPhone = sc.next();
-                        }
-                    }
-                    telephones.add(firstPhone);
-                    telephones.add(secondPhone);
-                    break;
-                case 3:
-                    System.out.println("Enter first telephone: ");
-                    if (sc.hasNext()) {
-                        firstPhone = sc.next();
-                        while (!Validator.getIntance().telephoneIsValid(firstPhone)) {
-                            firstPhone = sc.next();
-                        }
-                        System.out.println("Enter second telephone: ");
-                        secondPhone = sc.next();
-                        while (!Validator.getIntance().telephoneIsValid(secondPhone)) {
-                            secondPhone = sc.next();
-                        }
-                        System.out.println("Enter theard telephone: ");
-                        theardPhone = sc.next();
-                        while (!Validator.getIntance().telephoneIsValid(theardPhone)) {
-                            theardPhone = sc.next();
-                        }
-                    }
-                    telephones.add(firstPhone);
-                    telephones.add(secondPhone);
-                    telephones.add(theardPhone);
-                    break;
-
-                default:
-
-                    throw new InvalidDataException("Something went wrong while entering telephone");
-
-            }
-        }
-
 
     }
+
+    static void enterPhones() throws InvalidDataException {
+        String firstPhone = null;
+        String secondPhone = null;
+        String theardPhone = null;
+        int amount = 0;
+        Scanner sc = new Scanner(System.in);
+
+        System.out.println("How many phones do you want to enter?");
+
+
+        if (sc.hasNextInt()) {
+            amount = sc.nextInt();
+            while (amount <= 0 || amount > 3) {
+                amount = sc.nextInt();
+            }
+        }
+        switch (amount) {
+            case 1:
+                System.out.println("Enter telephone: ");
+                if (sc.hasNext()) {
+                    firstPhone = sc.next();
+                    while (!Validator.getIntance().telephoneIsValid(firstPhone)) {
+                        firstPhone = sc.next();
+                    }
+                }
+                telephones.add(firstPhone);
+                break;
+
+            case 2:
+                System.out.println("Enter first telephone: ");
+                if (sc.hasNext()) {
+                    firstPhone = sc.next();
+                    while (!Validator.getIntance().telephoneIsValid(firstPhone)) {
+                        firstPhone = sc.next();
+                    }
+                    System.out.println("Enter second telephone: ");
+                    secondPhone = sc.next();
+                    while (!Validator.getIntance().telephoneIsValid(secondPhone)) {
+                        secondPhone = sc.next();
+                    }
+                }
+                telephones.add(firstPhone);
+                telephones.add(secondPhone);
+                break;
+            case 3:
+                System.out.println("Enter first telephone: ");
+                if (sc.hasNext()) {
+                    firstPhone = sc.next();
+                    while (!Validator.getIntance().telephoneIsValid(firstPhone)) {
+                        firstPhone = sc.next();
+                    }
+                    System.out.println("Enter second telephone: ");
+                    secondPhone = sc.next();
+                    while (!Validator.getIntance().telephoneIsValid(secondPhone)) {
+                        secondPhone = sc.next();
+                    }
+                    System.out.println("Enter theard telephone: ");
+                    theardPhone = sc.next();
+                    while (!Validator.getIntance().telephoneIsValid(theardPhone)) {
+                        theardPhone = sc.next();
+                    }
+                }
+                telephones.add(firstPhone);
+                telephones.add(secondPhone);
+                telephones.add(theardPhone);
+                break;
+
+            default:
+
+                throw new InvalidDataException("Something went wrong while entering telephone");
+
+        }
+    }
+
+
+}

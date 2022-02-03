@@ -4,9 +4,11 @@ import by.bsuir.test.entity.User;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Optional;
 
 public interface Searchable {
 
-    User toFindUser(String name, String surname) throws IOException;
+    Optional<User> findUserByEmail(String email) throws IOException;
+
 
 }

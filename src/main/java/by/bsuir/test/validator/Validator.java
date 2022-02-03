@@ -13,7 +13,7 @@ public class Validator implements Validational {
 
     public static Validator getIntance(){
         if (validator == null){
-            return new Validator();
+            validator = new Validator();
         }
         return validator;
     }

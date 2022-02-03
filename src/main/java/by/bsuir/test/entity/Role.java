@@ -7,8 +7,7 @@ public enum Role {
     CUSTOMER(1),
     ADMIN(2),
     PROVIDER(2),
-    SUPER_ADMIN(3),
-    UNAUTHORIZED_USER;
+    SUPER_ADMIN(3);
 
    private int level;
 
