@@ -1,12 +1,13 @@
 package by.bsuir.test.logic.impl;
 
+import by.bsuir.test.entity.Role;
 import by.bsuir.test.entity.User;
 import by.bsuir.test.exception.InvalidDataException;
 import by.bsuir.test.logic.Editable;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Optional;
+
 
 public class EditUser implements Editable {
 
@@ -41,16 +42,6 @@ public class EditUser implements Editable {
             case 1:
                 firstTelephone = CreateUser.telephones.get(0);
                 newPhones.add(firstTelephone);
-                ArrayList<User> newUsersList = InputOutputDataHandler.read();
-                for (User us: newUsersList){
-                    if (us.getEmail().equals(editableUser.getEmail())){
-                        us.setMobilePhone(newPhones);
-                    }
-                }
-                InputOutputDataHandler.cleanFile(editableUser);
-                 for (User u: newUsersList) {
-                     InputOutputDataHandler.getInstance().write(u);
-                 }
                 break;
 
             case 2:
@@ -58,9 +49,7 @@ public class EditUser implements Editable {
                 secondTelephone = CreateUser.telephones.get(1);
                 newPhones.add(firstTelephone);
                 newPhones.add(secondTelephone);
-                editableUser.setMobilePhone(newPhones);
-                InputOutputDataHandler.cleanFile(editableUser);
-                InputOutputDataHandler.getInstance().write(editableUser);
+
                 break;
             case 3:
                 firstTelephone = CreateUser.telephones.get(0);
@@ -69,24 +58,63 @@ public class EditUser implements Editable {
                 newPhones.add(firstTelephone);
                 newPhones.add(secondTelephone);
                 newPhones.add(theardTelephone);
-                editableUser.setMobilePhone(newPhones);
-                InputOutputDataHandler.cleanFile(editableUser);
-                InputOutputDataHandler.getInstance().write(editableUser);
                 break;
             default:
                 throw new InvalidDataException("Something went wrong with changing telephones");
+        }
+
+        ArrayList<User> newUsersList = InputOutputDataHandler.read();
+        for (User us: newUsersList){
+            if (us.getEmail().equals(editableUser.getEmail())){
+                us.setMobilePhone(newPhones);
+            }
+        }
+        InputOutputDataHandler.cleanFile(editableUser);
+        for (User u: newUsersList) {
+            InputOutputDataHandler.getInstance().write(u);
         }
 
 
     }
 
     @Override
-    public User editRole(String name, String surname) {
-        return null;
+    public void editRole(String email) throws IOException {
+        CreateUser.chooseRole();
+        ArrayList<User> changedUserDataList = InputOutputDataHandler.read();
+        for (User us: changedUserDataList){
+            if (us.getEmail().equals(email)){
+                us.setRole(CreateUser.roles);
+
+            }
+        }
+        InputOutputDataHandler.cleanFile(new User());
+        for (User u: changedUserDataList) {
+            InputOutputDataHandler.getInstance().write(u);
+        }
     }
 
     @Override
-    public User editUserData(String name, String surname) {
-        return null;
+    public void editUserData(String email) throws IOException, InvalidDataException {
+
+
+        User newDataUser = CreateUser.getInstance().createUser();
+
+        ArrayList<User> newUsersList = InputOutputDataHandler.read();
+        for (User us: newUsersList){
+            if (us.getEmail().equals(email)){
+                us.setName(newDataUser.getName());
+                us.setSurname(newDataUser.getSurname());
+                us.setEmail(newDataUser.getEmail());
+                us.setRole(newDataUser.getRole());
+                us.setMobilePhone(newDataUser.getMobilePhone());
+
+            }
+        }
+        InputOutputDataHandler.cleanFile(newDataUser);
+        for (User u: newUsersList) {
+            InputOutputDataHandler.getInstance().write(u);
+        }
+
+
     }
 }

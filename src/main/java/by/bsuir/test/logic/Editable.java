@@ -9,9 +9,9 @@ public interface Editable {
 
     void editTelephone(String email) throws IOException, InvalidDataException;
 
-    User editRole(String name, String surname);
+    void editRole(String email) throws IOException;
 
-    User editUserData(String name, String surname);
+    void editUserData(String email) throws IOException, InvalidDataException;
 
 
 }

@@ -14,10 +14,8 @@ public class Main {
         ArrayList<User> users;
 
         try {
-            EditUser.getInstance().editTelephone("ggg.w@gmail.com");
+            EditUser.getInstance().editRole("ggg.w@gmail.com");
         } catch (IOException e) {
-            e.printStackTrace();
-        } catch (InvalidDataException e) {
             e.printStackTrace();
         }
 //        try {
