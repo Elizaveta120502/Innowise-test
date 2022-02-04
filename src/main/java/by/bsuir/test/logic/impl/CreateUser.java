@@ -93,7 +93,7 @@ public class CreateUser {
                 secondRole = sc.next();
 
                 if (Role.of(firstRole).getLevel() == 1) {
-                    while ((!secondRole.equalsIgnoreCase(String.valueOf(Role.ADMIN)) ||
+                    while (!(secondRole.equalsIgnoreCase(String.valueOf(Role.ADMIN)) ||
                             secondRole.equalsIgnoreCase(String.valueOf(Role.PROVIDER)))) {
                         System.out.println("Invalid input.Try again \n");
                         secondRole = sc.next();
@@ -102,7 +102,7 @@ public class CreateUser {
                 }
 
                 if (Role.of(firstRole).getLevel() == 2) {
-                    while ((!secondRole.equalsIgnoreCase(String.valueOf(Role.USER)) ||
+                    while (!(secondRole.equalsIgnoreCase(String.valueOf(Role.USER)) ||
                             secondRole.equalsIgnoreCase(String.valueOf(Role.CUSTOMER)))) {
                         System.out.println("Invalid input.Try again \n");
                         secondRole = sc.next();

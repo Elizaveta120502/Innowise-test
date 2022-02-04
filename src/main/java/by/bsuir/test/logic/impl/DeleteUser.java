@@ -25,13 +25,18 @@ public class DeleteUser implements Deletable {
     public void deleteById(int id) throws IOException {
 
         ArrayList<User> users = InputOutputDataHandler.getInstance().read();
-        int tempId = 0;
+        User userToDelete = new User();
         for (User us : users) {
              if (us.getId() == id){
-                 tempId = id;
+                 userToDelete = us;
              }
         }
-        users.remove(tempId - ID_UNIT);
+        if(userToDelete != null) {
+            users.remove(userToDelete);
+            System.out.println("Successful removal");
+        }else{
+            System.out.println("Error of delete");
+        }
 
         InputOutputDataHandler.cleanFile();
         for (User u : users) {

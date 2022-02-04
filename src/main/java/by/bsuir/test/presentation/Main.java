@@ -33,7 +33,7 @@ public class Main {
                     "\n" +
                     "3.Edit user information" +
                     "\n" +
-                    "(you can edit all data and separately phones or roles " +
+                    "(you can edit whole data and separately phones or roles) " +
                     "\n" +
                     "4.View all users" +
                     "\n" +
@@ -45,6 +45,7 @@ public class Main {
 
             if (sc.hasNextInt()) {
                 firstNumber = sc.nextInt();
+
                 while (firstNumber > 6 || firstNumber < 1) {
                     System.out.println("Invalid input.Try again");
                     firstNumber = sc.nextInt();

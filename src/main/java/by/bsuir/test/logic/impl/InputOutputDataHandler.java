@@ -97,7 +97,7 @@ public class InputOutputDataHandler {
             BufferedWriter bw = new BufferedWriter(writer);
 
             if (user != null) {
-                bw.write("\r\n");
+                bw.write("\n");
                 bw.write(String.valueOf(user.getId()));
                 bw.write(" ");
                 bw.write(user.getName());
